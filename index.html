@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuzArt - Where Ancient Earth Meets Modern Elevation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-salt: #E8C4B8;
+            --deep-pink: #D4A5A5;
+            --earth-tone: #8B7355;
+            --charcoal: #2C2C2C;
+            --cream: #F5F0EB;
+            --gold: #C9A572;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(245, 240, 235, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 165, 114, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--earth-tone);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(135deg, var(--cream) 0%, #E8DDD6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 240, 235, 0.8) 0%, rgba(232, 221, 214, 0.9) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 196, 184, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 165, 165, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            color: var(--earth-tone);
+            line-height: 1.2;
+        }
+
+        .hero-subtext {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        section {
+            padding: 120px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            color: var(--earth-tone);
+            text-align: center;
+        }
+
+        .story-section {
+            background: white;
+            padding: 120px 80px;
+        }
+
+        .story-image-container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .story-image:hover {
+            transform: scale(1.05);
+        }
+
+        .story-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 2;
+            color: var(--charcoal);
+        }
+
+        .story-content h3 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--deep-pink);
+            letter-spacing: 1px;
+        }
+
+        .story-content p {
+            margin-bottom: 25px;
+        }
+
+        .collection-section {
+            background: linear-gradient(to bottom, var(--cream), white);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .collection-item {
+            padding: 40px;
+            background: white;
+            border: 1px solid rgba(201, 165, 114, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .collection-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .collection-item:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .collection-item h4 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--earth-tone);
+        }
+
+        .collection-item p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+        .engraving-section {
+            background: var(--deep-pink);
+            color: white;
+            padding: 80px;
+            margin: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .engraving-content {
+            text-align: left;
+        }
+
+        .engraving-section h4 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .engraving-section p {
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .engraving-image-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .engraving-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .experience-section {
+            background: white;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .experience-card {
+            padding: 40px;
+            border-left: 3px solid var(--gold);
+            background: var(--cream);
+        }
+
+        .experience-card h4 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--earth-tone);
+        }
+
+        .experience-card p {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #3a3a3a 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 60px;
+        }
+
+        .cta-section h2 {
+            font-size: 52px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 165, 114, 0.3);
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtext {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .collection-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                height: 300px;
+            }
+
+            .product-image-container {
+                height: 250px;
+            }
+
+            .engraving-section {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+
+            .engraving-content {
+                text-align: center;
+            }
+
+            .engraving-image-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">TUZART</div>
+        <ul class="nav-links">
+            <li><a href="#story">Story</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-image-overlay">
+            <img src="hero-image.png" alt="TuzArt Hero" class="hero-bg-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Where Ancient Earth<br>Meets Modern Elevation</h1>
+            <p class="hero-subtext">Artisan-carved Himalayan pink salt presentation pieces that transform your signature dishes into multi-sensory experiences. Each hand-crafted utensil—from tasting fork to cocktail spoon—dissolves slowly into the palate, releasing layers of ancient minerality that elevate your culinary vision beyond taste alone.</p>
+        </div>
+        <div class="scroll-indicator">Discover More ↓</div>
+    </section>
+
+    <section id="story" class="story-section">
+        <h2 class="section-title">Our Concept</h2>
+        <div class="story-image-container">
+            <img src="himalayan-salt-formation.png" alt="Himalayan Salt Formation" class="story-image">
+        </div>
+        <div class="story-content">
+            <h3>Pink Heritage: The Convergence of Time and Taste</h3>
+            <p>What began as primordial seabeds beneath the Himalayan plateau—compressed, mineralized, and perfected over 250 million years—now rests between your guest's fingertips. TuzArt transforms geological wonder into culinary instrument.</p>
+            
+            <p>This is not decoration. This is not novelty. This is the marriage of deep time and deliberate craft.</p>
+            
+            <p>Each piece we create carries within it the memory of ancient oceans: 84 trace minerals, untouched by modern pollution, crystallized into blush-toned stone. Our master artisans carve these primordial deposits with surgical precision, honoring both the material's sacred origin and your creative vision.</p>
+            
+            <p>When your guest lifts our salt fork to their lips, they do not simply taste your dish. They experience the ghost of Jurassic seas, the whisper of tectonic pressure, the patient work of geological epochs—all channeled through your culinary artistry. The salt dissolves imperceptibly, releasing its complex minerality in perfect synchrony with your flavor composition.</p>
+            
+            <p>This is heritage made edible. History made intimate. Geology made gastronomic.</p>
+            
+            <p>TuzArt exists at the intersection where your culinary mastery meets Earth's oldest memories—creating a moment so singular, so sensorially complete, that your guests will carry it with them long after the final course.</p>
+        </div>
+    </section>
+
+    <section id="collection" class="collection-section">
+        <h2 class="section-title">The Craft</h2>
+        <p style="text-align: center; font-size: 20px; max-width: 800px; margin: 0 auto 60px; font-style: italic;">Functional Sculpture: The Flavor Architect's Toolkit</p>
+        
+        <div class="collection-grid">
+            <div class="collection-item">
+                <div class="product-image-container">
+                    <img src="tasting-fork.png" alt="The Tasting Fork" class="product-image">
+                </div>
+                <h4>The Tasting Fork</h4>
+                <p>Designed for canapés and amuse-bouche presentations where the salt's minerality must arrive in controlled, elegant increments.</p>
+            </div>
+            
+            <div class="collection-item">
+                <div class="product-image-container">
+                    <img src="mini-skewer.png" alt="The Mini Skewer" class="product-image">
+                </div>
+                <h4>The Mini Skewer</h4>
+                <p>Perfect for your signature bites, transforming the act of retrieval into an edible ceremony. As guests withdraw each element, microscopic salt crystals transfer to the food.</p>
+            </div>
+            
+            <div class="collection-item">
+                <div class="product-image-container">
+                    <img src="cocktail-spoon.png" alt="The Cocktail Spoon" class="product-image">
+                </div>
+                <h4>The Cocktail Spoon</h4>
+                <p>For your mixology program, a stirring implement that imparts sophisticated mineral complexity to craft cocktails while creating visual theatre.</p>
+            </div>
+            
+            <div class="collection-item">
+                <div class="product-image-container">
+                    <img src="caviar-paddle.png" alt="The Caviar Paddle" class="product-image">
+                </div>
+                <h4>The Caviar Paddle</h4>
+                <p>The purist's choice, ensuring delicate roes and premium seafood receive only the crystalline kiss of ancient minerals, never metallic interference.</p>
+            </div>
+        </div>
+
+        <div class="engraving-section">
+            <div class="engraving-content">
+                <h4>Your Signature: Laser Engraving</h4>
+                <p>The ultimate expression of exclusivity lies in permanence. Through precision laser etching, we inscribe your establishment's emblem directly into the salt crystal matrix—transforming each piece into a branded artifact of your culinary philosophy. Your logo becomes part of the mineral structure itself, visible yet refined, ensuring that every photographed moment carries your mark.</p>
+            </div>
+            <div class="engraving-image-container">
+                <img src="laser-engraving.png" alt="Laser Engraving Process" class="engraving-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience-section">
+        <h2 class="section-title">The Experience</h2>
+        
+        <div class="experience-grid">
+            <div class="experience-card">
+                <h4>Unparalleled Social Documentation</h4>
+                <p>Your guests don't photograph ordinary cutlery. They photograph the extraordinary. Pink salt implements create an immediate visual disruption—an Instagrammable anomaly that transforms every plate into content. Your restaurant becomes the backdrop for thousands of organic impressions, each post carrying the subtle question: "Where is this happening?"</p>
+            </div>
+            
+            <div class="experience-card">
+                <h4>The Memory Marker Effect</h4>
+                <p>Dining experiences blur together in your guests' minds within weeks. But singular sensory moments—the unexpected texture, the dissolving implement, the realization that their "utensil" has become part of the dish—these create neurological markers. TuzArt pieces don't just serve your food; they ensure your restaurant occupies permanent real estate in your guests' memory architecture.</p>
+            </div>
+            
+            <div class="experience-card">
+                <h4>Elevated Brand Positioning</h4>
+                <p>Price-conscious establishments serve meals. You orchestrate experiences. The presence of TuzArt on your tables is an unspoken declaration: "We consider details others don't even perceive." This level of thoughtfulness repositions your brand in the luxury hierarchy—not through proclamation, but through tangible evidence of uncompromising standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <h2>Commission Your Collection</h2>
+        <p style="font-size: 18px; max-width: 600px; margin: 0 auto; line-height: 1.8;">Begin your partnership with TuzArt and transform every service into an unforgettable sensory journey.</p>
+        <a href="mailto:atelier@tuzart.com" class="cta-button">Request Private Consultation</a>
+    </section>
+
+    <footer>
+        <p>TUZART © 2025 | Atelier of Edible Elegance</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(245, 240, 235, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(245, 240, 235, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
